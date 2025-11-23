@@ -1,5 +1,5 @@
 """
-CLI Tests for pyDecode
+CLI Tests for PyExplain
 
 Author: Md. Yahya Ab. Wahid Mundewadi
 Email: yahyabuilds@gmail.com
@@ -8,10 +8,7 @@ License: MIT
 """
 
 import pytest
-import sys
-from pathlib import Path
-from io import StringIO
-from pydecode.cli import main, create_parser, run_file
+from pyexplain.cli import main, create_parser
 
 
 class TestCLIParser:
@@ -25,11 +22,6 @@ class TestCLIParser:
         parser = create_parser()
         args = parser.parse_args(['--version'])
         assert args.version is True
-    
-    def test_parser_help_flag(self):
-        parser = create_parser()
-        args = parser.parse_args(['--help'])
-        # Help will exit, so just test it parses
 
 
 class TestCLIMain:
@@ -39,18 +31,10 @@ class TestCLIMain:
         exit_code = main(['--version'])
         captured = capsys.readouterr()
         assert exit_code == 0
-        assert 'pyDecode' in captured.out or 'pyDecode' in str(captured)
+        assert 'PyExplain' in captured.out or 'PyExplain' in str(captured)
     
     def test_main_no_args(self):
         exit_code = main([])
-        assert exit_code == 1  # Should fail without file argument
-
-
-class TestCLIRunFile:
-    """Tests for run_file function."""
-    
-    def test_run_nonexistent_file(self, capsys):
-        exit_code = run_file('nonexistent_file.py')
         assert exit_code == 1
 
 

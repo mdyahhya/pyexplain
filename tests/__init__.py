@@ -1,7 +1,7 @@
 """
-pyDecode Test Suite
+PyExplain Test Suite
 
-This package contains comprehensive tests for all pyDecode functionality.
+This package contains comprehensive tests for all PyExplain functionality.
 
 Test Modules:
     - test_core.py: Tests for core decoding functions
@@ -10,17 +10,9 @@ Test Modules:
     - test_cli.py: Tests for CLI functionality
 
 Running Tests:
-    # Run all tests
     pytest
-    
-    # Run with coverage
-    pytest --cov=pydecode --cov-report=html
-    
-    # Run specific test file
+    pytest --cov=pyexplain --cov-report=html
     pytest tests/test_core.py
-    
-    # Run specific test
-    pytest tests/test_core.py::test_decode_traceback_basic
 
 Author: Md. Yahya Ab. Wahid Mundewadi
 Email: yahyabuilds@gmail.com
@@ -38,8 +30,8 @@ PROJECT_ROOT = TEST_DIR.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # Test configuration
-TEST_TIMEOUT = 30  # seconds
-SLOW_TEST_THRESHOLD = 5  # seconds
+TEST_TIMEOUT = 30
+SLOW_TEST_THRESHOLD = 5
 
 # Sample tracebacks for testing
 SAMPLE_TRACEBACKS = {
@@ -87,53 +79,23 @@ SyntaxError: invalid syntax""",
     return result
     ^
 IndentationError: unexpected indent""",
-    
-    "FileNotFoundError": """Traceback (most recent call last):
-  File "file_test.py", line 2, in <module>
-    with open("nonexistent.txt", "r") as f:
-FileNotFoundError: [Errno 2] No such file or directory: 'nonexistent.txt'""",
-    
-    "ImportError": """Traceback (most recent call last):
-  File "import_test.py", line 1, in <module>
-    from missing_module import something
-ImportError: cannot import name 'something' from 'missing_module'""",
-    
-    "ModuleNotFoundError": """Traceback (most recent call last):
-  File "module_test.py", line 1, in <module>
-    import nonexistent_package
-ModuleNotFoundError: No module named 'nonexistent_package'"""
 }
 
-# Helper function to create test exceptions
+
 def create_test_exception(exception_type: type, message: str = "test error"):
-    """
-    Create a test exception with a realistic traceback.
-    
-    Args:
-        exception_type: Type of exception to create
-        message: Error message
-        
-    Returns:
-        Exception instance with traceback
-    """
+    """Create a test exception with a realistic traceback."""
     try:
         raise exception_type(message)
     except exception_type as e:
         return e
 
 
-# Test fixtures and utilities
 class TestHelper:
     """Helper class with utility methods for tests."""
     
     @staticmethod
     def assert_valid_decoded_output(result: dict):
-        """
-        Assert that a decoded result has all required fields.
-        
-        Args:
-            result: Dictionary returned from decode functions
-        """
+        """Assert that a decoded result has all required fields."""
         required_fields = [
             'error_type',
             'simple_explanation',
@@ -147,7 +109,6 @@ class TestHelper:
         for field in required_fields:
             assert field in result, f"Missing required field: {field}"
         
-        # Check types
         assert isinstance(result['error_type'], str)
         assert isinstance(result['simple_explanation'], str)
         assert isinstance(result['fix_suggestion'], str)
@@ -156,36 +117,21 @@ class TestHelper:
         assert isinstance(result['emoji'], str)
         assert isinstance(result['success'], bool)
         
-        # Check non-empty
         assert len(result['simple_explanation']) > 10, "Explanation too short"
         assert len(result['fix_suggestion']) > 10, "Fix suggestion too short"
         assert len(result['tags']) > 0, "No tags provided"
     
     @staticmethod
     def assert_contains_branding(text: str):
-        """
-        Assert that text contains pyDecode branding.
-        
-        Args:
-            text: Text to check
-        """
-        assert "Powered by pyDecode" in text or "Created by Yahya" in text
+        """Assert that text contains PyExplain branding."""
+        assert "Powered by PyExplain" in text or "Created by Yahya" in text
     
     @staticmethod
     def get_sample_traceback(error_type: str) -> str:
-        """
-        Get a sample traceback for testing.
-        
-        Args:
-            error_type: Type of error (e.g., 'ValueError')
-            
-        Returns:
-            Sample traceback string
-        """
+        """Get a sample traceback for testing."""
         return SAMPLE_TRACEBACKS.get(error_type, SAMPLE_TRACEBACKS['ValueError'])
 
 
-# Export test utilities
 __all__ = [
     'SAMPLE_TRACEBACKS',
     'create_test_exception',

@@ -1,7 +1,7 @@
 """
-pyDecode Version Management Module
+PyExplain Version Management Module
 
-This module contains version information for the pyDecode library.
+This module contains version information for the PyExplain library.
 It follows Semantic Versioning (SemVer): MAJOR.MINOR.PATCH
 
 - MAJOR: Incompatible API changes
@@ -20,9 +20,9 @@ __version__ = "1.0.0"
 __version_info__ = tuple(int(i) for i in __version__.split("."))
 
 # Package metadata
-__title__ = "pyDecode"
+__title__ = "PyExplain"
 __description__ = "Convert Python errors into beginner-friendly explanations"
-__url__ = "https://github.com/mdyahhya/pydecode"
+__url__ = "https://github.com/mdyahhya/pyexplain"
 __author__ = "Md. Yahya Ab. Wahid Mundewadi"
 __author_email__ = "yahyabuilds@gmail.com"
 __license__ = "MIT"
@@ -33,7 +33,7 @@ __company__ = "Dominal Group"
 __company_url__ = "https://dominal.in"
 
 # Branding
-__branding__ = "Powered by pyDecode ● Created by Yahya"
+__branding__ = "Powered by PyExplain ● Created by Yahya"
 
 # Python version requirements
 __python_requires__ = ">=3.8"
@@ -79,13 +79,13 @@ __all__ = [
 
 def get_version() -> str:
     """
-    Get the current version of pyDecode.
+    Get the current version of PyExplain.
     
     Returns:
         str: Version string in format MAJOR.MINOR.PATCH
         
     Example:
-        >>> from pydecode._version import get_version
+        >>> from pyexplain._version import get_version
         >>> print(get_version())
         1.0.0
     """
@@ -100,7 +100,7 @@ def get_version_info() -> dict:
         dict: Dictionary containing all version metadata
         
     Example:
-        >>> from pydecode._version import get_version_info
+        >>> from pyexplain._version import get_version_info
         >>> info = get_version_info()
         >>> print(info['version'])
         1.0.0
@@ -135,10 +135,10 @@ def print_version_info() -> None:
     This is useful for debugging and support requests.
     
     Example:
-        >>> from pydecode._version import print_version_info
+        >>> from pyexplain._version import print_version_info
         >>> print_version_info()
         ╔══════════════════════════════════════════════════════════╗
-        ║                   pyDecode v1.0.0                        ║
+        ║                   PyExplain v1.0.0                       ║
         ╚══════════════════════════════════════════════════════════╝
         ...
     """
